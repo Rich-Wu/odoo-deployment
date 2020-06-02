@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data/pgdata
+    deploy:
+      resources:
+        limits:
+          cpus: '0.6'
+          memory: 400M
+        reservations:
+          cpus: '0.2'
+          memory: 20M
+  odoo:
+    image: odoo:13
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - /home/ubuntu/extra-addons:/mnt/extra-addons
+    deploy:
+      resources:
+        limits:
+          memory: 200M
+volumes:
+  dbdata:
+  odoo-data:
