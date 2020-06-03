@@ -18,8 +18,8 @@ curl -o /srv/docker/docker-compose.yml https://raw.githubusercontent.com/Rich-Wu
 
 # # copy in systemd unit file and register it so our compose file runs 
 # # on system restart
-# curl -o /etc/systemd/system/docker-compose-app.service https://raw.githubusercontent.com/mikegcoleman/todo/master/docker-compose-app.service
-# systemctl enable docker-compose-app
+curl -o /etc/systemd/system/docker-compose-app.service https://raw.githubusercontent.com/Rich-Wu/odoo-deployment/master/deploy-pg-odoo.service
+systemctl enable deploy-pg-odoo.service
 
 # # start up the application via docker-compose
-# docker-compose -f /srv/docker/docker-compose.yml up -d
+docker-compose -f /srv/docker/docker-compose.yml up -d
